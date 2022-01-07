@@ -10,4 +10,17 @@ class CategoryController extends Controller
     {
         return view('admin.category.index');
     }
+
+    public function addCategory(Request $request)
+    {
+        $validated = $request->validate(
+            [
+                'category_name' => 'required|unique:categories|max:255|min:5',
+            ],
+            [
+                'category_name.required' => "Please input category name",
+                'category_name.min' => "Category name must be between 5 and 255",
+            ]
+        );
+    }
 }
