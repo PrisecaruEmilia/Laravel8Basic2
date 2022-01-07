@@ -13,7 +13,8 @@ class CategoryController extends Controller
 {
     public function allCategories()
     {
-        return view('admin.category.index');
+        $categories = Category::latest()->get();
+        return view('admin.category.index', compact('categories'));
     }
 
     public function addCategory(Request $request)
@@ -31,11 +32,11 @@ class CategoryController extends Controller
         // insert data eloquent ORM
         // 1 approach
 
-        // Category::insert([
-        //     'category_name' => $request->category_name,
-        //     'user_id' => Auth::user()->id,
-        //     'created_at' => Carbon::now(),
-        // ]);
+        Category::insert([
+            'category_name' => $request->category_name,
+            'user_id' => Auth::user()->id,
+            'created_at' => Carbon::now(),
+        ]);
 
         // 2 approach
 
@@ -47,10 +48,11 @@ class CategoryController extends Controller
 
 
         // insert data query builder
-        $data = array();
-        $data['category_name'] = $request->category_name;
-        $data['user_id'] = Auth::user()->id;
-        DB::table('categories')->insert($data);
+
+        // $data = array();
+        // $data['category_name'] = $request->category_name;
+        // $data['user_id'] = Auth::user()->id;
+        // DB::table('categories')->insert($data);
 
 
         return Redirect()->back()->with('success', 'Category created successfully.');
