@@ -22,34 +22,36 @@
                        <div class="card-header">
                            All Categories
                        </div>
-
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th scope="col">SL No</th>
-                                <th scope="col">Category Name</th>
-                                <th scope="col">User id</th>
-                                <th scope="col">Created At</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                                @php($i=1)
-                                @foreach ($categories as $category)
-                                    <tr>
-                                        <th scope="row"># {{ $i++ }}</th>
-                                        <td>{{ $category->category_name }}</td>
-                                        <td>{{ $category->user_id }}</td>
-                                        <td>
-                                            @if($category->created_at == null)
-                                                <span class="text-danger">No Date Set</span>
-                                            @else
-                                            {{ Carbon\Carbon::parse($category->created_at)->diffForHumans() }}
-                                            @endif
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                       <div class="card-body">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">SL No</th>
+                                    <th scope="col">Category Name</th>
+                                    <th scope="col">User id</th>
+                                    <th scope="col">Created At</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    @php($i=1)
+                                    @foreach ($categories as $category)
+                                        <tr>
+                                            <th scope="row"># {{ $categories->firstItem()+$loop->index }}</th>
+                                            <td>{{ $category->category_name }}</td>
+                                            <td>{{ $category->user_id }}</td>
+                                            <td>
+                                                @if($category->created_at == null)
+                                                    <span class="text-danger">No Date Set</span>
+                                                @else
+                                                {{ Carbon\Carbon::parse($category->created_at)->diffForHumans() }}
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            {{ $categories->links() }}
+                       </div>
 
                     </div>
                 </div>
