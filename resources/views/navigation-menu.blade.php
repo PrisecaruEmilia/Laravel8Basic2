@@ -18,6 +18,9 @@
                     <x-jet-nav-link href="{{ route('all.categories') }}" :active="request()->routeIs('all.categories')">
                         All Cateogory
                     </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('all.brands') }}" :active="request()->routeIs('all.categories')">
+                        Brands
+                    </x-jet-nav-link>
                 </div>
             </div>
 

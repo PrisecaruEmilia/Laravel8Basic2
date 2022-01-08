@@ -3,6 +3,7 @@
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CategoryController;
 
@@ -35,12 +36,15 @@ Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 
 Route::get('/category/all', [CategoryController::class, 'allCategories'])->name('all.categories');
 Route::post('/category/add', [CategoryController::class, 'addCategory'])->name('store.category');
-
 Route::get('/category/edit/{id}', [CategoryController::class, 'edit']);
 Route::post('/category/update/{id}', [CategoryController::class, 'update']);
 Route::get('/category/softdelete/{id}', [CategoryController::class, 'softdelete']);
 Route::get('/category/restore/{id}', [CategoryController::class, 'restore']);
 Route::get('/category/pdelete/{id}', [CategoryController::class, 'permanentDelete']);
+
+// brand controllers
+
+Route::get('/brand/all', [BrandController::class, 'allBrands'])->name('all.brands');
 
 
 
