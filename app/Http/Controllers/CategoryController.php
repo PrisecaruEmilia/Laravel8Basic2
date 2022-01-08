@@ -13,13 +13,13 @@ class CategoryController extends Controller
 {
     public function allCategories()
     {
-        $categories = DB::table('categories')
-            ->join('users', 'categories.user_id', 'users.id')
-            ->select('categories.*', 'users.name')
-            ->latest()->paginate(3);
+        // $categories = DB::table('categories')
+        //     ->join('users', 'categories.user_id', 'users.id')
+        //     ->select('categories.*', 'users.name')
+        //     ->latest()->paginate(3);
 
 
-        // $categories = Category::latest()->paginate(3);
+        $categories = Category::latest()->paginate(3);
         // $categories = DB::table('categories')->latest()->paginate(3);
         return view('admin.category.index', compact('categories'));
     }
@@ -63,5 +63,30 @@ class CategoryController extends Controller
 
 
         return Redirect()->back()->with('success', 'Category created successfully.');
+    }
+
+    public function edit($id)
+    {
+        $category = Category::find($id);
+        return view('admin.category.edit', compact('category'));
+    }
+    public function update(Request $request, $id)
+    {
+
+        $validated = $request->validate(
+            [
+                'category_name' => 'required|unique:categories|max:255|min:5',
+            ],
+            [
+                'category_name.required' => "Please input category name",
+                'category_name.min' => "Category name must be between 5 and 255",
+            ]
+        );
+
+        $update = Category::find($id)->update([
+            'category_name' => $request->category_name,
+        ]);
+
+        return Redirect()->route('all.categories')->with('success', 'Category updated successfully.');
     }
 }
