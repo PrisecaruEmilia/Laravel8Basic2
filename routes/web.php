@@ -38,6 +38,12 @@ Route::post('/category/add', [CategoryController::class, 'addCategory'])->name('
 
 Route::get('/category/edit/{id}', [CategoryController::class, 'edit']);
 Route::post('/category/update/{id}', [CategoryController::class, 'update']);
+Route::get('/category/softdelete/{id}', [CategoryController::class, 'softdelete']);
+Route::get('/category/restore/{id}', [CategoryController::class, 'restore']);
+Route::get('/category/pdelete/{id}', [CategoryController::class, 'permanentDelete']);
+
+
+
 
 
 
