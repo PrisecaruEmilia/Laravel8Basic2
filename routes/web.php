@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use App\Models\Brand;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BrandController;
@@ -13,7 +14,8 @@ Route::get('/email/verify', function () {
 })->middleware('auth')->name('verification.notice');
 
 Route::get('/', function () {
-    return view('home');
+    $brands = Brand::all();
+    return view('home', compact('brands'));
 });
 
 Route::get('/welcome', function () {
