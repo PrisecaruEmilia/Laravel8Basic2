@@ -154,7 +154,7 @@
                                <a href="#"> <i class="mdi mdi-settings"></i> Account Setting </a>
                             </li>
                             <li class="dropdown-footer">
-                               <a href="signin.html"> <i class="mdi mdi-logout"></i> Log Out </a>
+                               <a href="{{ route('user.logout') }}"> <i class="mdi mdi-logout"></i> Log Out </a>
                             </li>
                          </ul>
                       </li>

@@ -7,6 +7,7 @@ use App\Models\Multipic;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 
 class BrandController extends Controller
@@ -146,5 +147,11 @@ class BrandController extends Controller
 
 
         return Redirect()->route('multi.images')->with('success', 'Images inserted successfully');
+    }
+
+    public function logoutUser()
+    {
+        Auth::logout();
+        return redirect()->route('login')->with('success', 'Logged out successfully');
     }
 }
