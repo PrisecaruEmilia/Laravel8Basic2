@@ -96,4 +96,13 @@ class BrandController extends Controller
 
         return Redirect()->route('all.brands')->with('success', 'Brand updated successfully');
     }
+
+    public function delete($id)
+    {
+        $brand = Brand::find($id);
+        $old_image = $brand->brand_image;
+        unlink($old_image);
+        $brand->delete();
+        return Redirect()->route('all.brands')->with('success', 'Brand deleted successfully');
+    }
 }
