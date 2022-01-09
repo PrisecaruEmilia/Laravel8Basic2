@@ -79,7 +79,11 @@
                                        <div class="control-indicator"></div>
                                     </label>
                                  </div>
-                                 <p><a class="text-blue" href="{{ route('password.request') }}">Forgot Your Password?</a></p>
+                                 <p>
+                                    @if (Route::has('password.request'))
+                                    <a class="text-blue" href="{{ route('password.request') }}">Forgot Your Password?</a>
+                                    @endif
+                                 </p>
                               </div>
                               <button type="submit" class="btn btn-lg btn-primary btn-block mb-4">Sign In</button>
                               <p>Don't have an account yet ?
