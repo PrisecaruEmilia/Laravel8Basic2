@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Brand;
+use App\Models\Multipic;
 use Illuminate\Http\Request;
-use Intervention\Image\Facades\Image;
 
 use Illuminate\Support\Carbon;
+use Intervention\Image\Facades\Image;
 
 class BrandController extends Controller
 {
@@ -110,5 +111,35 @@ class BrandController extends Controller
         unlink($old_image);
         $brand->delete();
         return Redirect()->route('all.brands')->with('success', 'Brand deleted successfully');
+    }
+
+
+    // this is for multi image
+
+    public function multiPic()
+    {
+        $images = Multipic::all();
+        return view('admin.multipic.index', compact('images'));
+    }
+
+    public function addImages(Request $request)
+    {
+        // pass the requested images
+        $images = $request->file('image');
+
+        foreach ($images as $image) {
+            $name_generate = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
+            Image::make($image)->resize(300, 300)->save('image/multi/' . $name_generate);
+            $last_image = 'image/multi/' . $name_generate;
+
+            Multipic::insert([
+                'image' => $last_image,
+                'created_at' => Carbon::now()
+            ]);
+        }
+
+
+
+        return Redirect()->route('multi.images')->with('success', 'Images inserted successfully');
     }
 }
