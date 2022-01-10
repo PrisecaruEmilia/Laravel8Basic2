@@ -5,6 +5,7 @@ use App\Models\Brand;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CategoryController;
@@ -53,12 +54,28 @@ Route::post('/multi/add', [BrandController::class, 'addImages'])->name('store.im
 
 // ADMIN all routes
 
+//Slider
 Route::get('/home/slider', [HomeController::class, 'homeSlider'])->name('home.slider');
 Route::get('/add/slider', [HomeController::class, 'addSlider'])->name('add.slider');
 Route::post('/store/slider', [HomeController::class, 'storeSlider'])->name('store.slider');
 Route::get('/slider/edit/{id}', [HomeController::class, 'editSlider']);
 Route::post('/brand/update/{id}', [HomeController::class, 'updateSlider'])->name('update.slider');
 Route::get('/slider/delete/{id}', [HomeController::class, 'deleteSlider']);
+
+
+// About
+Route::get('/home/about', [AboutController::class, 'homeAbout'])->name('home.about');
+Route::get('/add/about', [AboutController::class, 'addAbout'])->name('add.about');
+Route::post('/store/about', [AboutController::class, 'storeAbout'])->name('store.about');
+Route::get('/about/edit/{id}', [AboutController::class, 'editAbout']);
+Route::post('/about/update/{id}', [AboutController::class, 'updateAbout'])->name('update.about');
+
+Route::get('/about/delete/{id}', [AboutController::class, 'deleteAbout']);
+
+
+
+
+
 
 
 
