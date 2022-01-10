@@ -77,6 +77,9 @@ Route::post('/about/update/{id}', [AboutController::class, 'updateAbout'])->name
 Route::get('/about/delete/{id}', [AboutController::class, 'deleteAbout']);
 
 
+// Portofolio
+Route::get('/portofolio', [AboutController::class, 'portofolio'])->name('portofolio');
+
 
 
 
