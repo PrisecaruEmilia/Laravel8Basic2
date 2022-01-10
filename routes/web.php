@@ -32,7 +32,7 @@ Route::get('/about', function () {
     return view('about');
 });
 
-Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+// Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 
 // category controllers
 
@@ -82,6 +82,10 @@ Route::get('/portofolio', [AboutController::class, 'portofolio'])->name('portofo
 
 
 
+// Contact
+Route::get('/admin/contact', [ContactController::class, 'adminContact'])->name('admin.contact');
+Route::get('/add/contact', [ContactController::class, 'addContact'])->name('add.contact');
+Route::post('/store/contact', [ContactController::class, 'storeContact'])->name('store.contact');
 
 
 
