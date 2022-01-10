@@ -52,4 +52,62 @@ class HomeController extends Controller
 
         return Redirect()->route('home.slider')->with('success', 'Slider inserted successfully');
     }
+
+    public function deleteSlider($id)
+    {
+        $slider = Slider::find($id);
+        $old_image = $slider->image;
+        unlink($old_image);
+        $slider->delete();
+        return Redirect()->route('home.slider')->with('success', 'Slider deleted successfully');
+    }
+
+    public function editSlider($id)
+    {
+        $slider = Slider::find($id);
+        return view('admin.slider.edit', compact('slider'));
+    }
+
+    public function updateSlider(Request $request, $id)
+    {
+        $validated = $request->validate(
+            [
+                'title' => 'required|max:255|min:5',
+                'description' => 'required|max:255|min:5',
+                'image' => 'mimes:jpg,jpeg,png',
+            ],
+            [
+                'title.required' => "Please input slider title",
+                'title.min' => "Slider title must be longer then 2",
+            ]
+        );
+
+        // take the old image and remove it
+        $old_image = $request->old_image;
+
+        if ($request->image == null) {
+            $last_image = $old_image;
+        } else {
+            // pass the requested images
+            $image = $request->file('image');
+
+            $name_generate = hexdec(uniqid());
+            $img_ext = strtolower($image->getClientOriginalExtension());
+            $img_name = $name_generate . '.' . $img_ext;
+            $upload_location = 'image/slider/';
+            $last_image = $upload_location . $img_name;
+
+            $image->move($upload_location, $img_name);
+
+            unlink($old_image);
+        }
+
+        Slider::find($id)->update([
+            'title' => $request->title,
+            'description' => $request->description,
+            'image' => $last_image,
+        ]);
+
+        return Redirect()->route('home.slider')->with('success', 'Slider updated successfully');
+    }
 }
