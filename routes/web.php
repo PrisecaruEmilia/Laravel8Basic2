@@ -2,6 +2,7 @@
 
 use App\Models\User;
 use App\Models\Brand;
+use App\Models\HomeAbout;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -17,7 +18,8 @@ Route::get('/email/verify', function () {
 
 Route::get('/', function () {
     $brands = Brand::all();
-    return view('home', compact('brands'));
+    $about = DB::table('home_abouts')->first();
+    return view('home', compact('brands', 'about'));
 });
 
 Route::get('/welcome', function () {
