@@ -90,6 +90,8 @@ Route::post('/store/contact', [ContactController::class, 'storeContact'])->name(
 
 // Contact Home Pages
 Route::get('/contact', [ContactController::class, 'contact'])->name('contact');
+Route::post('/contact/form', [ContactController::class, 'contactForm'])->name('contact.form');
+
 
 
 
