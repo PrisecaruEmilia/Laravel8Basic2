@@ -82,14 +82,14 @@ Route::get('/portofolio', [AboutController::class, 'portofolio'])->name('portofo
 
 
 
-// Contact
+// Contact Admin
 Route::get('/admin/contact', [ContactController::class, 'adminContact'])->name('admin.contact');
 Route::get('/add/contact', [ContactController::class, 'addContact'])->name('add.contact');
 Route::post('/store/contact', [ContactController::class, 'storeContact'])->name('store.contact');
 
 
-
-
+// Contact Home Pages
+Route::get('/contact', [ContactController::class, 'contact'])->name('contact');
 
 
 
