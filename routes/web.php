@@ -2,6 +2,7 @@
 
 use App\Models\User;
 use App\Models\Brand;
+use App\Models\Multipic;
 use App\Models\HomeAbout;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -19,7 +20,8 @@ Route::get('/email/verify', function () {
 Route::get('/', function () {
     $brands = Brand::all();
     $about = DB::table('home_abouts')->first();
-    return view('home', compact('brands', 'about'));
+    $multipics = Multipic::all();
+    return view('home', compact('brands', 'about', 'multipics'));
 });
 
 Route::get('/welcome', function () {

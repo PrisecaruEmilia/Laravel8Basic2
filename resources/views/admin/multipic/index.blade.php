@@ -1,11 +1,12 @@
-<x-app-layout>
+{{-- <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight d-flex justify-content-between">
             <b>Multi pictures</b>
             <b><span class="badge badge-danger"></span></b>
         </h2>
-    </x-slot>
-
+    </x-slot> --}}
+@extends('admin.admin_master')
+@section('admin')
     <div class="py-12">
        <div class="container">
            <div class="row">
@@ -52,4 +53,5 @@
             </div>
        </div>
     </div>
-</x-app-layout>
+@endsection
+{{-- </x-app-layout> --}}
